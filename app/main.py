@@ -11,7 +11,7 @@ app = FastAPI(title="Document Intelligence API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost", "http://127.0.0.1", "http://localhost:8000", "http://127.0.0.1:8000"],
+    allow_origins=["http://localhost", "http://127.0.0.1", "http://localhost:8000", "http://127.0.0.1:8000", "https://document-intelligence-api-50z7.onrender.com"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
