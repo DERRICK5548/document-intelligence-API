@@ -16,7 +16,7 @@ embedding_fn = embedding_functions.SentenceTransformerEmbeddingFunction(model_na
 
 # collection - in ChromaDB is like a table in database 
 # get_or_create_collection - if a collection named "documents" already exists , reuse it  else create a new one 
-collection = client.get_or_create_collection(name="documents", embedding_function=embedding_fn) # type: ignore
+collection = client.get_or_create_collection(name="documents") # type: ignore
 
 # inserting a batch of text chunks into the collection
 # add_chunks() - saving chunks into the vector store
@@ -27,7 +27,10 @@ def add_chunks(doc_id: str, chunks: list[str]):
     # create metadata dictionary for each chunk 
     # "source" - whch file this chunk came from
     # chunk_index - position of this chunk within the file 
-    metadatas = [{"source": doc_id, "chunk_index": i} for i in range(len(chunks))]
+    metadatas = [
+        {"source": doc_id, 
+         "chunk_index": i
+         } for i in range(len(chunks))]
     # Actually inserts data into ChromaDB 
     # documents=chunks  - the raw text (gets embedded automatically using embedding_fn )
     collection.add(documents=chunks, metadatas=metadatas, ids=ids)  # type: ignore
